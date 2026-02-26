@@ -3,7 +3,7 @@ function addition(a,b){
 }
 
 function subtraction(a,b){
-    return a -b;
+    return a - b;
 }
 
 function multiplication(a,b){
@@ -29,40 +29,120 @@ function squareRoot(a){
     return Math.sqrt(a);
 }
 
-function operate(operator, a,b){
-
+function operate(operator, a, b){
+    switch(operator){
+        case "+": return addition(a, b);
+        case "-": return subtraction(a, b);
+        case "x": return multiplication(a, b);
+        case "/": return division(a, b);
+        case "square": return square(a); 
+        case "squareRoot": return squareRoot(a);
+    }
 }
 
+
 function main(){
-    let num1 = parseFloat(prompt("Enter first number:"));
-    let operator = prompt("Enter operator");
+    let display = document.getElementById("display");
+    const btnNum = document.querySelectorAll(".btn-num");
+    const btnOperator = document.querySelectorAll(".btn-operator");
+    let input = false;
+    let currentInput = "";
+    let currentExpression = "";
+    let operator = "";
+    let firstNum = 0;
+    let secondNum = 0;
 
-    if (operator == "sqr"){
-        alert(square(num1));
-        return;
-    }
-    if (operator == "root"){
-        alert(squareRoot(num1));
-        return;
-    }
-    let num2 = parseFloat(prompt("Enter second number:"));
+    btnNum.forEach((btn) => {
+        btn.addEventListener("click", () => {
+            if (input) return;
+            currentInput += btn.id;
+            currentExpression += btn.id;
+            display.value = currentExpression;
+        });
+    });
 
-    switch(operator){
-        case "+":
-            alert(addition(num1,num2));
-            break;
-        case "-":
-            alert(subtraction(num1,num2));
-            break;
-        case "*":
-            alert(multiplication(num1,num2));
-            break;
-        case "/":
-            alert(division(num1,num2));
-            break;
-        default:
-            alert("Invalid operator");
-    }
+    btnOperator.forEach((btn) => {
+        btn.addEventListener("click", () => {
+            switch(btn.id){
+                case "clear":
+                    currentInput = "";
+                    currentExpression = "";
+                    operator = "";
+                    firstNum = 0;
+                    secondNum = 0;
+                    display.value = currentExpression;
+                    input = false;
+                    break;
+                case "back":
+                    if (currentInput.length > 0) {
+                        currentInput = currentInput.slice(0, -1);
+                    }
+                    currentExpression = currentExpression.slice(0, -1);
+                    display.value = currentExpression;
+                    break;
+                case "plus":
+                    firstNum = parseFloat(currentInput);
+                    currentInput = "";
+                    operator = "+";
+                    currentExpression += " + ";  
+                    display.value = currentExpression;
+                    input = false;
+                    break;
+
+                case "minus":
+                    firstNum = parseFloat(currentInput);
+                    currentInput = "";
+                    operator = "-";
+                    currentExpression += " - ";  
+                    display.value = currentExpression;
+                    input = false;
+                    break;
+
+                case "multiplication":
+                    firstNum = parseFloat(currentInput);
+                    currentInput = "";
+                    operator = "x";
+                    currentExpression += " x ";  
+                    display.value = currentExpression;
+                    input = false;
+                    break;
+
+                case "Division":
+                    firstNum = parseFloat(currentInput);
+                    currentInput = "";
+                    operator = "/";
+                    currentExpression += " / ";  
+                    display.value = currentExpression;
+                    input = false;
+                    break;
+
+                case "square":
+                    firstNum = parseFloat(currentInput);
+                    currentInput = "";
+                    operator = "square";
+                    currentExpression += " ^2 ";  
+                    display.value = currentExpression;
+                    input = false;
+                    break;
+
+                case "=":
+                secondNum = parseFloat(currentInput);
+                let result = operate(operator, firstNum, secondNum);
+                display.value = result;
+                currentExpression = String(result);
+                currentInput = String(result);
+                firstNum = result;
+                operator = "";
+                input = true;
+                break;
+                 
+            }
+        });
+    });
+
+    
+
+
 
 }
 
