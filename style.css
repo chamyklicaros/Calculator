@@ -19,7 +19,7 @@ body{
     height: 50px;
     margin-bottom: 10px;
   
-    font-size: 12px;
+    font-size: 18px;
     box-sizing: border-box;
     text-align: right;
     
@@ -32,4 +32,17 @@ body{
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 3px;
+}
+
+button{
+    padding: 15px;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    background-color: #e0e0e0;
+    cursor: pointer;
+}
+
+button:hover{
+    background-color: #d0d0d0;
 }
