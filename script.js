@@ -48,6 +48,7 @@ function main(){
     let input = false;
     let currentInput = "";
     let currentExpression = "";
+    let dotUsed = false;
     let operator = "";
     let firstNum = 0;
     let secondNum = 0;
@@ -72,6 +73,7 @@ function main(){
                     secondNum = 0;
                     display.value = currentExpression;
                     input = false;
+                    dotUsed = false;
                     break;
                 case "back":
                     if (currentInput.length > 0) {
@@ -123,6 +125,17 @@ function main(){
                     currentExpression += " ^2 ";  
                     display.value = currentExpression;
                     input = false;
+                    break;
+                case "dot":
+                    if (dotUsed) return;
+                    if (currentInput === "") {
+                        currentInput = "0.";
+                    } else {
+                        currentInput += ".";
+                    }
+                    dotUsed = true;
+                    currentExpression += ".";
+                    display.value = currentExpression;
                     break;
 
                 case "=":
