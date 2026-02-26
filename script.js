@@ -106,7 +106,7 @@ function main(){
                 break;
 
                 case "dot":
-                    if (dotUsed) return;
+                    if (dotUsed || specialOpeatorUsed) return;
                     if (currentInput === "") {
                         currentInput = "0.";
                     } else {
@@ -137,6 +137,7 @@ function main(){
                     currentExpression += " - ";  
                     display.value = currentExpression;
                     input = false;
+                    operationUsed = true; 
                     dotUsed = false;
                     break;
 
@@ -147,6 +148,7 @@ function main(){
                     currentExpression += " x ";  
                     display.value = currentExpression;
                     input = false;
+                    operationUsed = true; 
                     dotUsed = false;
                     break;
 
@@ -157,6 +159,7 @@ function main(){
                     currentExpression += " / ";  
                     display.value = currentExpression;
                     input = false;
+                    operationUsed = true; 
                     dotUsed = false;
                     break;
 
@@ -168,6 +171,7 @@ function main(){
                     display.value = currentExpression;
                     input = false;
                     specialOpeatorUsed = true;
+                    operationUsed = true; 
                     dotUsed = false;
                     break;
                 case "squareRoot":
@@ -178,6 +182,7 @@ function main(){
                     display.value = currentExpression;
                     input = false;
                     specialOpeatorUsed = true;
+                    operationUsed = true; 
                      dotUsed = false;
 
                     break;
